@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title>TASKS</title>
+
+  <!-- This is neccesary to bootstrap responsive -->
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+  <!-- bootstrap 3.3.6 ccs-->
+  <link rel="stylesheet" href="content/bootstrap.min.css">
+
+  <!-- styles generate-->
+  <link rel="stylesheet" href="content/stylesMain.css">
+
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="" class="navbar-brand text-uppercase">ROKK3RLABS TEST TASKS</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container-fluid"  ng-controller="controlController as ctrl">
+    <section class="main row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <p><h3>TASKS</h3></p>
+        <table class="table" id="tableStyle">
+          <tr>
+            <td>Name</td>
+            <td>Due Date</td>
+            <td>Priority</td>
+          </tr>
+          <tr>
+            <td><input type="text" name="name" ng-model="ctrl.task.name"></td>
+            <td><input type="date" name="dueDate" ng-model="ctrl.task.dueDate"></td>
+            <td><input type="number" name="priority" ng-model="ctrl.task.priority"></td>
+          </tr>
+        </table>
+        <div>
+          <button class = "btn btn-primary" ng-click="ctrl.addTask()">ADD</button>
+        </div>
+
+        <p><h3>ORDER BY</h3></p>
+        <div>
+          <button class = "btn btn-primary" ng-click="ctrl.orderByDueDate(!ctrl.toogleDueDate)">DUE DATE</button>
+          <button class = "btn btn-primary" ng-click="ctrl.orderByName(!ctrl.toogleName)">NAME</button>
+          <button class = "btn btn-primary" ng-click="ctrl.orderByPriority(!ctrl.tooglePriority)">PRIORITY</button>
+        </div>
+        
+        <p><h3>LIST OF TASKS</h3></p>
+        <table class="table text-center" id="tableStyle">
+          <tr>
+            <td>Name</td>
+            <td>Due Date</td>
+            <td>Priority</td>
+          </tr>
+          <tr ng-repeat="task in ctrl.tasks track by task._id" ng-class="ctrl.getClaseRow(task.dueDate)">
+            <td>{{task.name}}</td>
+            <td>{{task.dueDate}}</td>
+            <td>{{task.priority}}</td>
+          </tr>
+        </table>
+
+      </div>
+      <div class="col-md-3"></div>
+    </section>
+
+  </div>
+
+  <!-- angularjs 1.4.8, bootstrap 3.3.6 and jquery 1.11.3 javascript-->
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script src="scripts/angularjs.min.js"></script>
+  <script src="scripts/jquery.flot.min.js"></script>
+  <script src="scripts/lodash.js"></script>
+
+  <script src="app/app.module.js"></script>
+  <script src="app/server.factory.js"></script>
+  <script src="app/control.controller.js"></script>
+  
+</body>
+</html>
